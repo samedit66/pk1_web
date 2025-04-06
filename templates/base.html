@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>{% block title %}{% endblock title %}</title>
+    <link rel="shortcut icon" href="{{ url_for('static', filename='images/ruwiki_head.jpg') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='base.css') }}">
+    {% block styles %}{% endblock styles %}
+</head>
+
+<body>
+    <div class="header">
+        <div class="header_menu">
+            <a href="{{ url_for('index') }}"><img class="ruwiki-icon" src="{{ url_for('static', filename='images/рувики_лого.svg') }}" alt="Лого Рувики"></a>
+
+            <div class="header-buttons">
+                <button class="button-login">Войти</button>
+                <button class="button-change-font">Аа</button>
+            </div>
+        </div>
+
+    </div>
+
+    {% block content %} {% endblock content %}
+
+
+
+</body>
+
+</html>

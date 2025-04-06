@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block title %}{{title_article}}{% endblock title %}
+
+{% block styles %}
+<link rel="stylesheet" href="{{ url_for('static', filename='article.css') }}">
+{% endblock styles %}
+
+{% block content %}
+<div class="article">
+    <div class="article_text">
+        <div>
+            <h1>{{ title_article }}</h1>
+        </div>
+
+        <div class="article_btns">
+            <button class="article_btn">
+                <img src="{{ url_for('static', filename='images/translate.png') }}" class="article_icon">
+            </button>
+            <button class="article_btn"><img src="{{ url_for('static', filename='images/share.png') }}" class="article_icon"></button>
+            <button class="article_btn">
+                <img src="{{ url_for('static', filename='images/headphones.png') }}" class="article_icon">
+                Послушать</button>
+        </div>
+
+        <div>
+            {{text_article}}
+        </div>
+
+    </div>
+
+    <div class="article_image">
+        <h3 class="article_image_name">{{article_image_title}}</h3>
+
+        <img src="{{ url_for('static', filename=article_image_path) }}" alt="{{title_article}}">
+    </div>
+</div>
+{% endblock content %}
