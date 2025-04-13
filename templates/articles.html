@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block title %}Список всех статей{% endblock %}
+
+{% block styles %}
+<link rel="stylesheet" href="{{ url_for('static', filename='articles.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="article_table">
+    {% for group in groups %}
+    <div class="article_table_row">
+        {% for article in group %}
+        <div class="article_card">
+            <h3>{{ article.title }}</h3>
+        </div>
+        {% endfor %}
+    </div>
+    {% endfor %}
+
+</div>
+{% endblock %}

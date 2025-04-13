@@ -10,7 +10,7 @@
 <div class="article">
     <div class="article_text">
         <div>
-            <h1>{{ title_article }}</h1>
+            <h1>{{ article.title }}</h1>
         </div>
 
         <div class="article_btns">
@@ -24,13 +24,13 @@
         </div>
 
         <div>
-            {{text_article}}
+            {{ article.content }}
         </div>
 
     </div>
 
     <div class="article_image">
-        <h3 class="article_image_name">{{article_image_title}}</h3>
+        <h3 class="article_image_name">{{ article.title }}</h3>
 
         <img src="{{ url_for('static', filename=article_image_path) }}" alt="{{title_article}}">
     </div>
