@@ -32,7 +32,10 @@
     <div class="article_image">
         <h3 class="article_image_name">{{ article.title }}</h3>
 
-        <img src="{{ url_for('static', filename=article_image_path) }}" alt="{{title_article}}">
+        <img
+            src="{{ url_for('uploaded_photo', filename=article.photo) }}"
+            alt="{{ article.title }}"
+        >
     </div>
 </div>
 {% endblock content %}

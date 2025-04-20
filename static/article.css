@@ -58,7 +58,12 @@ p{
 }
 
 
-.article_image{
+.article_text {
+    width: 60%;
+}
+
+.article_image {
+    width: 40%;
     padding-left: 40px;
     padding-right: 40px;
     display: flex;
@@ -67,6 +72,11 @@ p{
     flex-direction: column;
 }
 
-.article_image_name{
+.article_image img {
+    max-width: 200px;
+    height: auto;
+}
+
+.article_image_name {
     margin: 20px;
 }
