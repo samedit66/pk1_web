@@ -4,8 +4,6 @@ from article import Article
 
 
 class Database:
-    articles = []
-
     DATABASE = "database.db"
     SCHEMA = "schema.sql"
 
@@ -24,6 +22,26 @@ class Database:
         connection.commit()
 
     @staticmethod
+    def select(sql, params=()):
+        # 1. Подключаемся к базе данных
+        connection = sqlite3.connect(Database.DATABASE)
+
+        # 2. Получаем курсор базы данных
+        cursor = connection.cursor()
+
+        # 3. Выполянем запрос
+        cursor.execute(sql, params)
+
+        # 4. Преобразуем всё в обьекты Article
+        raw_articles = cursor.fetchall()
+        articles = []
+        for id, title, content, photo in raw_articles:
+            article = Article(title, content, photo, id)
+            articles.append(article)
+
+        return articles
+
+    @staticmethod
     def create_table():
         with open(Database.SCHEMA) as schema_file:
             Database.execute(schema_file.read())
@@ -34,9 +52,26 @@ class Database:
             return False
 
         Database.execute(
-            "INSERT INTO articles VALUES (?, ?, ?)",
+            "INSERT INTO articles (title, content, photo) VALUES (?, ?, ?)",
             [article.title, article.content, article.photo]
         )
+        return True
+
+    @staticmethod
+    def find_article_by_id(id):
+        articles = Database.select("SELECT * FROM articles WHERE id = ?", [id])
+        if not articles:
+            return None
+        
+        return articles[0]
+    
+    @staticmethod
+    def delete_article_by_id(id):
+        article = Database.find_article_by_id(id)
+        if article is None:
+            return False
+        
+        Database.execute("DELETE FROM articles WHERE id = ?", [id])
         return True
 
     @staticmethod
@@ -58,14 +93,25 @@ class Database:
         article[0] == (12312, "Соник", "Соник это еж", "sonic.png")
         """
 
-        article = Article(
-            articles[0][0],
-            articles[0][1],
-            articles[0][2],
-            articles[0][3]
-        )
+        id, title, content, photo = articles[0]
+        article = Article(title, content, photo, id)
         return article
 
     @staticmethod
     def get_all_articles():
-        return Database.articles
+        # 1. Подключаемся к базе данных
+        connection = sqlite3.connect(Database.DATABASE)
+
+        # 2. Получаем курсор базы данных
+        cursor = connection.cursor()
+
+        # 3. Ищем заданную статью
+        cursor.execute("SELECT * FROM articles")
+        raw_articles = cursor.fetchall()
+
+        articles = []
+        for id, title, content, photo in raw_articles:
+            article = Article(title, content, photo, id)
+            articles.append(article)
+
+        return articles

@@ -92,6 +92,14 @@ p{
     height: auto;
 }
 
+.button-create-article {
+    color: #5e2ec8;
+    border: none;
+    border-radius: 15px;
+    padding: 6px 12px;
+    cursor: pointer;
+}
+
 .button-login{
     color: #5e2ec8;
     border: none;

@@ -17,13 +17,39 @@ p{
     justify-content: center;
 }
 
+.controls_wrapper {
+    display: flex;
+    justify-content: start;
+    width: 1000px;
+}
+
+.controls {
+    display: flex;
+}
+
+.conrtols_btn {
+    color: black;
+    background-color: white;
+    border: none;
+    border-radius: 15px;
+    padding: 10px 16px;
+    cursor: pointer;
+    font-weight: bold;
+    margin-right: 8px;
+}
+
+.conrtols_btn:hover {
+    color: white;
+    background-color: #5e2ec8;
+    transition: background-color 0.5s ease-in-out;
+}
+
 .article {
     background-color: white;
     padding: 20px;
     margin: 20px;
     width: 1000px;
     border-radius: 20px;
-
     display: flex;
     flex-direction: row;
 }
