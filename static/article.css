@@ -44,6 +44,12 @@ p{
     transition: background-color 0.5s ease-in-out;
 }
 
+.conrtols_btn:not(:hover) {
+    color: black;
+    background-color: white;
+    transition: background-color 0.5s ease-in-out;
+}
+
 .article {
     background-color: white;
     padding: 20px;

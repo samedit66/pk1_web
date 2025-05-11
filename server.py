@@ -59,6 +59,42 @@ def delete_article(id):
     return redirect(url_for('index'))
 
 
+@app.route('/edit_article/<int:id>', methods=["GET", "POST"])
+def edit_article(id):
+    article = Database.find_article_by_id(id)
+
+    if request.method == "GET":
+        if article is None:
+            abort(404, f"Article with id '{id}' doesn't exist")
+
+        return render_template('edit_article.html', article=article)
+
+    # POST-запрос
+    title = request.form.get("title")
+    if title is None:
+        # Если мы не задали новое название для статьи,
+        # т.е. мы его не редактировали, берем старое из БД
+        title = article.title
+
+    content = request.form.get("content")
+    if content is None:
+        content = article.content
+
+    photo = request.files.get("photo")
+    if photo is None or not photo.filename:
+        filename = article.photo
+    else:
+        # TODO: удалить старую фотку...
+
+        # Если мы задали новую фотку к статье,
+        # сохраняем ее в БД
+        photo.save(app.config["UPLOAD_FOLDER"] + photo.filename)
+        filename = photo.filename
+    
+    Database.update_article(id, title, content, filename)
+    return redirect(url_for('article', name=title))
+
+
 @app.route('/add_article', methods=['GET', 'POST'])
 def add_article():
     if request.method == 'GET':

@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block title %}Править статью{% endblock title %}
+
+{% block styles %}
+
+<link rel="stylesheet" href="{{ url_for('static', filename='add_article.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='edit_article.css') }}">
+
+{% endblock styles %}
+
+
+{% block content %}
+<h1>Править статью</h1>
+
+<form class="add_article_form" action="{{ url_for('edit_article', id=article.id) }}" method="POST" enctype="multipart/form-data">
+    <div class="form_group">
+        <label for="title">Название статьи:</label>
+        <input value="{{ article.title }}" type="text" id="title" name="title" required>
+    </div>
+    
+    <div class="form_group">
+        <label for="content">Содержание сатьи:</label>
+        <textarea name="content" id="content" required>{{ article.content }}</textarea>
+    </div>
+    
+    <div class="form_group">
+        <div class="given_photo">
+            <h4 class="name_mini_photo">Прикрепленная фотография:</h3>
+            <img
+                class="mini_photo"
+                src="{{ url_for('uploaded_photo', filename=article.photo) }}"
+                alt="{{ article.title }}"
+            >
+        </div>
+
+        <label for="photo">Заменить фото (jpg, svg, png):</label>
+        <input type="file" id="photo" name="photo" accept=".jpg, .jpeg, .png, .svg"> 
+    </div>
+    
+    <input type="submit" value="Сохранить изменения">
+    
+</form>
+{% endblock content %}
