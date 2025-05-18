@@ -16,7 +16,8 @@ body{
     margin-bottom: 5px;
 }
 
-.add_article_form input[type='text']{
+.add_article_form input[type='text'],
+.add_article_form input[type="password"] {
     border-radius: 5px;
     border: 1px lightgray solid;
     height: 20px;
@@ -44,4 +45,13 @@ body{
     background-color: #5e2ec8;
     color: white;
     cursor: pointer;
+}
+
+.error_message {
+    color: #721c24;
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+    border-radius: 16px;
+    padding: 16px;
+    margin-bottom: 8px;
 }

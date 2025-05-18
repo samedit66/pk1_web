@@ -4,3 +4,10 @@ CREATE TABLE IF NOT EXISTS articles (
     content TEXT NOT NULL,
     photo TEXT NOT NULL
 )
+
+CREATE TABLE IF NOT EXISTS users (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    email TEXT NOT NULL UNIQUE,
+    phone TEXT NOT NULL UNIQUE,
+    password_hash TEXT NOT NULL,
+)

@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block title %}Регистрация{% endblock title %}
+
+{% block styles %}
+
+<link rel="stylesheet" href="{{ url_for('static', filename='add_article.css') }}">
+
+{% endblock styles %}
+
+{% block content %}
+<h1>Зарегистрироваться</h1>
+
+{% for error in get_flashed_messages() %}
+<div class="error_message">{{ error }}</div>
+{% endfor %}
+
+<form class="add_article_form" action="{{ url_for('register') }}" method="POST">
+    <div class="form_group">
+        <label for="user_email">Электронная почта</label>
+        <input type="text" id="user_email" name="user_email" required>
+    </div>
+    
+    <div class="form_group">
+        <label for="user_phone">Номер телефона</label>
+        <input type="text" id="user_phone" name="user_phone" required>
+    </div>
+
+    <div class="form_group">
+        <label for="user_password">Пароль</label>
+        <input type="password" id="user_password" name="user_password" required>
+    </div>
+
+    <div class="form_group">
+        <label for="user_password_repeat">Повторите пароль</label>
+        <input type="password" id="user_password_repeat" name="user_password_repeat" required>
+    </div>
+
+    <input type="submit" value="Закончить регистрацию">
+</form>
+{% endblock content %}
