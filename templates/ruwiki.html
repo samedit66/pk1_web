@@ -15,7 +15,15 @@
 
                 <div class="header-buttons">
                     <a class="button-create-article" href="{{ url_for('add_article') }}">Создать статью</a>
-                    <button class="button-login">Войти</button>
+                    
+                    <form style="display: inline;" action="{{ url_for('login') }}" method="GET">
+                        <button class="button-login">Войти</button>
+                    </form>
+
+                    <form style="display: inline;" action="{{ url_for('register') }}" method="GET">
+                        <button class="button-login">Регистрация</button>
+                    </form>
+                    
                     <button class="button-change-font">Аа</button>
                 </div>
             </div>

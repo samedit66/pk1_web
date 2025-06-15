@@ -7,6 +7,7 @@ from flask import (
     flash,
     send_from_directory,
     abort,
+    session,
 )
 from article import Article
 import os
@@ -20,6 +21,30 @@ os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
 
 Database.create_table()
 
+@app.route("/login", methods=["GET", "POST"])
+def login():
+    if request.method == "GET":
+        return render_template("login.html")
+    
+    user_login = request.form.get("user_login")
+    user_password = request.form.get("user_password")
+
+    if not user_login:
+        flash("Логин не может быть пустым!")
+        return redirect(request.url)
+    
+    if not user_password:
+        flash("Пароль не может быть пустым!")
+        return redirect(request.url)
+
+    if not Database.can_be_logged_in(user_login, user_password):
+        flash("Такого пользователя не существует или неверный пароль!")
+        return redirect(request.url)
+
+    user = Database.find_user_by_email_or_phone(user_login)
+    session["user_id"] = user.id
+    print("Вы вошли на сайт!")
+    return redirect(url_for("index"))
 
 @app.route("/register", methods=["GET", "POST"])
 def register():
@@ -45,7 +70,7 @@ def register():
         flash("Пароли не совпадают!")
         return redirect(request.url)
 
-    return redirect(url_for("index"))
+    return redirect(url_for("login"))
 
 
 @app.route("/")
